@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.user.mapper.UserCMapper">
+
+	<insert id="insertUserC" parameterType="UserC">
+		 insert into userC(cname,cnum,cdname,cid,cpw,chp1,chp2,chp3,caddr,caddr2) 
+		 values(#{cname},#{cnum},#{cdname},#{cid},#{cpw},#{chp1},#{chp2},#{chp3},#{caddr},#{caddr2}) 
+	</insert>
+	
+	<select id="findUserC" parameterType="UserC" resultType="USerC">
+		select * from userc where cid=#{cid}	
+	</select>
+	
+	<select id="selectAll" parameterType="UserC" resultType="UserC">
+		select * from userc
+	</select>
+	
+	<select id="selectUserC" parameterType="UserC" resultType="UserC">
+		select * from userc where cid=#{cid}
+	</select>
+	
+	<update id="updateUserC" parameterType="UserC">
+		update userc set cname=#{cname},cnum=${cnum},cdname=${cdname},cid=#{cid},cpw=#{cpw},chp1=#{chp1},chp2=#{chp2},chp3=#{chp3},caddr=#{caddr},caddr2=#{caddr2} where cid=#{cid}
+	</update>
+	
+	<select id="idcheckC" parameterType="UserC" resultType="UserC">
+      select * from userc where cid=#{cid}
+   </select>
+</mapper>
+   

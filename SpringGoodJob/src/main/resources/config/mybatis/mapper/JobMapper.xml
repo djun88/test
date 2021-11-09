@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper 
+   namespace="com.job.mapper.JobMapper">
+   
+   <insert id="InsertJob" parameterType="Job">
+   	insert into jobc(cidx,cid,cimage,cname,cdname,chp1,chp2,chp3,caddr,ccategory,ce,ctype,cc,cpay,cpr,cposition,cmsg,cjobt,registjob) 
+   	values(cidx_seq.nextval,#{cid},#{cimage},#{cname},#{cdname},#{chp1},#{chp2},#{chp3},#{caddr},#{ccategory},#{ce},#{ctype},#{cc},#{cpay},#{cpr},#{cposition},#{cmsg},#{cjobt},0)
+   </insert>
+   
+   <select id="selectJobList" parameterType="string" resultType="Job">
+   		select * from jobc where cid = #{cid}
+   </select>
+   
+   <select id="selectJob" parameterType="int" resultType="Job">
+   		select * from jobc where cidx=#{cidx}
+   </select>
+   
+   <delete id="deleteJob" parameterType="int">
+   		delete from jobc where cidx=#{cidx}
+   </delete>
+   
+   <update id="updateJob" parameterType="Job">
+   		update jobc set cimage=#{cimage},cname=#{cname},cdname=#{cdname},chp1=#{chp1},chp2=#{chp2},chp3=#{chp3},caddr=#{caddr},ccategory=#{ccategory},ce=#{ce},ctype=#{ctype},cc=#{cc},cpay=#{cpay},cpr=#{cpr},cposition=#{cposition},cmsg=#{cmsg},cjobt=#{cjobt} where cidx=#{cidx}
+   </update>
+   
+   <select id="selectJobSearchList" parameterType="string" resultType="Job">
+   		select * from jobc where (cname||cjobt||ce||ctype||cpay||cposition||caddr) like '%'||#{jobKeyword}||'%'
+   </select>
+   
+   <select id="selectJobAll" resultType="Job" parameterType="java.lang.String">
+   		select * from jobc
+   </select>
+   
+   <select id="approveJob" resultType="Job" parameterType="Job">
+   		select * from jobc where registjob=1
+   </select>
+   
+   
+   <!-- 검색 페이징 처리 -->
+   <sql id="findWhere">
+   		<if test="findType !=null and findKeyword !=''">
+   			<where>
+   				<if test="findType==1"><!-- 직업별 공고제목이랑 연결-->
+   					cjobt like '%'||#{findKeyword}||'%'
+   				</if>
+   				<if test="findType==2"><!-- 산업별 원래는 직책이었는데 이걸로 연결 -->
+   					cposition like '%'||#{findKeyword}||'%'
+   				</if>
+   				<if test="findType==3"><!-- 지역별 주소랑 연결-->
+   					caddr like '%'||#{findKeyword}||'%'
+   				</if>
+   			</where>
+   		</if>
+   </sql>
+   
+   <select id="getTotalCountPaging" parameterType="Paging" resultType="int">
+   		select count(cidx) from jobc
+   		<include refid="findWhere"/>
+   </select>
+   
+   <select id="selectJobAllPaging" resultType="Job" parameterType="Paging">
+   
+   </select>
+   
+   <update id="approve" parameterType="Job">
+   		update jobc set registjob=1 where cidx=#{cidx} 
+   </update>
+   
+   <update id="remove" parameterType="Job">
+   		update jobc set registjob=0 where cidx=#{cidx}
+   </update>
+   
+</mapper>
+   

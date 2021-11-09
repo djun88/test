@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.resume.mapper.ResumeMapper">
+
+	<insert id="insertResume" parameterType="Resume">
+		insert into
+		resume(pid,idx,pname,pbirth,php1,php2,php3,addr,pimage,pc,psname,pmajor,pcname,pdate,pjname,pposition,pmsg,ptitle)
+		values(#{pid},resume_seq.nextval,#{pname},#{pbirth},#{php1},#{php2},#{php3},#{addr},#{pimage},#{pc},#{psname},#{pmajor},#{pcname},
+		#{pdate},#{pjname},#{pposition},#{pmsg},#{ptitle})
+	</insert>
+
+
+	<select id="selectResumeList" resultType="Resume" parameterType="string">
+		select * from resume where pid =#{pid}	
+	</select>
+
+	<select id="selectResume" resultType="Resume" parameterType="int">
+		select * from resume where idx =#{idx}	
+	</select>
+	
+	<delete id="deleteResume" parameterType="int">
+		delete from resume where idx=#{idx}
+	</delete>
+	
+	<update id="updateResume" parameterType="Resume">
+		update resume set addr=#{addr},pimage=#{pimage},pc=#{pc},psname=#{psname},pmajor=#{pmajor},pcname=#{pcname},pdate=#{pdate},pjname=#{pjname},pposition=#{pposition},pmsg=#{pmsg},php1=#{php1},php2=#{php2},php3=#{php3},ptitle=#{ptitle} where idx=#{idx}
+		
+	</update>
+	
+</mapper>
+   

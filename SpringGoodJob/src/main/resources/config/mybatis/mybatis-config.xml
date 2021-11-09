@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 타입 별칭 설정============================  -->
+	<typeAliases>
+		<typeAlias type="com.user.domain.UserPVO" alias="UserP"/>
+		<typeAlias type="com.user.domain.UserCVO" alias="UserC"/>
+		<typeAlias type="com.resume.domain.ResumeVO" alias="Resume"/>
+		<typeAlias type="com.job.domain.JobVO" alias="Job"/>
+		<typeAlias type="com.paging.domain.PagingVO" alias="Paging"/>
+		<typeAlias type="com.apply.domain.ApplyVO" alias="Apply"/>
+		<typeAlias type="com.liked.domain.LikedVO" alias="Liked"/>
+		
+	</typeAliases>
+	
+	<!-- 매퍼 정의================================ -->
+	<mappers>
+		<mapper resource="config/mybatis/mapper/UserPMapper.xml"/>
+		<mapper resource="config/mybatis/mapper/UserCMapper.xml"/>
+		<mapper resource="config/mybatis/mapper/resumeMapper.xml"/>
+		<mapper resource="config/mybatis/mapper/JobMapper.xml"/>
+		<mapper resource="config/mybatis/mapper/applyMapper.xml"/>
+		<mapper resource="config/mybatis/mapper/LikedMapper.xml"/>
+	</mappers>
+</configuration>

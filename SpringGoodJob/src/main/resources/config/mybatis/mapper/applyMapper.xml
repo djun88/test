@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.apply.mapper.applyMapper">
+
+	<insert id="insertApply" parameterType="Apply">
+		insert into apply(num, idx, cidx)
+		values(num_seq.nextval,#{idx},#{cidx})
+	</insert>
+
+	<select id="selectApply" parameterType="int" resultType="Apply">
+		select pname, pimage, b.idx
+		from apply a join resume b on a.idx=b.idx and a.cidx=#{cidx}
+	</select>
+
+	<select id="selectPid" parameterType="string" resultType="Apply">
+		select pname, pimage, pid, cidx
+		from apply a join resume b on a.idx=b.idx where pid=#{pid}
+	</select>
+
+</mapper>
+   

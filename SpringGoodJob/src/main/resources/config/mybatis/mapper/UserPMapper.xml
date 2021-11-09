@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.user.mapper.UserPMapper">
+
+	<insert id="insertUserP" parameterType="UserP">
+		insert into UserP(pname,pid,ppw,pbirth,php1,php2,php3,addr,addr2)
+		values(#{pname},#{pid},#{ppw},#{pbirth},#{php1},#{php2},#{php3},#{addr},#{addr2})
+	</insert>
+	
+	<select id="findUserP" parameterType="UserP" resultType="UserP">
+		select * from userp where pid=#{pid}
+	</select>
+	
+	<select id="selectAll" parameterType="UserP" resultType="UserP">
+		select * from userp
+	</select>
+	
+	<select id="selectUserP" parameterType="UserP" resultType="UserP">
+		select * from userp where pid=#{pid}
+	</select>
+	
+	<update id="updateUserP" parameterType="UserP">
+		update userp set pname=#{pname},pid=#{pid},ppw=#{ppw},pbirth=#{pbirth},php1=#{php1},php2=#{php2},php3=#{php3},addr=#{addr},addr2=#{addr2} where pid=#{pid}
+	</update>
+	<select id="idcheckP" parameterType="UserP" resultType="UserP">
+      select * from userp where pid=#{pid}
+   </select>
+	
+</mapper>
+   
